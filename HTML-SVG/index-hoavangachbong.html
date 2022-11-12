@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+  <h1>Học thêm Mẫu Hoa Văn - Checker ("Pattern") </h1>
+
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="1800" width="1600" viewBox="0 0 1600 1800">
+
+    <defs>
+      <pattern id="MauHoaVan" viewBox="0,0,30,30" width="15%" height="15%">
+        
+
+          <!-- 4 soc xanh duong -->
+        <polygon points="  4,0  11,0  11,30   4,30  4,0" fill="blue" />
+
+          <!-- Vien vang -->
+        <polygon points=" 10,0  15,0  0,15   0,10  10,0" fill="orange" />
+        <polygon points=" 15,0  20,0  30,10   30,15  15,0" fill="orange" />
+        <polygon points=" 0,15  15,30  10,30   0,20  0,15" fill="orange" />
+        <polygon points=" 15,30  30,15  30,20   20,30  15,30" fill="orange" />
+          
+        <!-- Border -->
+          <polygon points=" 0,0 30,0 30,30 0,30   0,0" stroke="black" stroke-width="1" fill="none" />
+
+        <!-- Het MauHoaVan -->
+            
+      </pattern>
+    </defs>
+    <!--  Thêm mẫu hoa văn vào nền của hình ảnh -->
+    <path d="
+      M 50, 50
+      h 500
+      v 500
+      h -500
+      v -500
+      " stroke="red" stroke-width="5" fill="url(#MauHoaVan)" />
+
+    <text x="210" y="76" fill="red">1 M</text>
+
+
+  </svg>
+  <!-- 
+  https://yqnn.github.io/svg-path-editor/ 
+  https://www.w3.org/TR/SVG/paths.html
+  https://bazaarvietnam.vn/wp-content/uploads/2014/10/Fashion-Dictionary-hoatiet-body.jpg
+  -->
+
+</body>
+
+</html>
