@@ -1,0 +1,56 @@
+
+
+<html>
+
+<body>
+  <hr>
+  <h1> Den giao thong tai Nga Tu: </h1>
+  <a href="http://adtekdev.top/"> Web cua Mr.Tu - AdTekDev.top </a>
+
+  <hr>
+  <p id="KetQua"></p>
+  <hr>
+</body>
+<script>
+  CodeDEN = -1;
+  function goiDoiColour() {
+    CodeDEN = (CodeDEN + 1) % 4;
+    if (CodeDEN == 0) {
+      mau01 = "green";
+      mau02 = "red";
+      thoigian = 5;
+    }
+    if (CodeDEN == 1) {
+      mau01 = "yellow";
+      mau02 = "red";
+      thoigian = 2;
+    }
+    if (CodeDEN == 2) {
+      mau01 = "red";
+      mau02 = "green";
+      thoigian = 3;
+    }
+    if (CodeDEN == 3) {
+      mau01 = "red";
+      mau02 = "yellow";
+      thoigian = 2;
+    }
+    // -- hien thi mau
+    doiColour(mau01, mau02)
+    setTimeout(goiDoiColour, thoigian * 1000);
+  }
+
+  function doiColour(mau01, mau02) {
+    document.getElementById("KetQua").innerHTML =
+      "<svg width='800' height='200'>"
+      + "<circle cx=100 cy=100 r=100 fill='" + mau01 + "'></circle>"
+      + "<circle cx=500 cy=100 r=100 fill='" + mau02 + "'></circle>"
+      + "</svg>";
+  }
+
+  goiDoiColour();
+
+  // Xanh-Do ; Vang-Do ; Do-Xanh ; Do-Vang 
+</script>
+
+</html>
