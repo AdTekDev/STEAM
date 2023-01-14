@@ -1,0 +1,43 @@
+
+<html>
+
+<body>
+  <hr>
+  <h1> Button: </h1>
+  <a href="http://adtekdev.top/"> Web cua Mr.Tu - AdTekDev.top </a>
+
+  <hr>
+  <p id="KetQua"></p>
+</body>
+<script>
+  CodeDEN = 0;
+  function goiDoiColour() {
+    CodeDEN = CodeDEN % 3;
+    if (CodeDEN == 0) {
+      mau = "green";
+      thoigian = 5;
+    }
+    if (CodeDEN == 1) {
+      mau = "yellow";
+      thoigian = 2;
+    }
+    if (CodeDEN == 2) {
+      mau = "red";
+      thoigian = 3;
+    }
+    // -- hien thi mau
+    doiColour(mau)
+    CodeDEN = CodeDEN + 1;
+    setTimeout(goiDoiColour, thoigian * 1000);
+
+  }
+
+  function doiColour(mau) {
+    document.getElementById("KetQua").innerHTML =
+      "<svg> <circle cx=100 cy=100 r=100 fill='" + mau + "'> </svg>";
+  }
+
+  goiDoiColour();
+</script>
+
+</html>
