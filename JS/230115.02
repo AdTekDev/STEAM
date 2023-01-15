@@ -1,0 +1,40 @@
+
+
+<html>
+
+<body>
+  <hr>
+  <h1> Trò chơi đoán số (1..99): </h1>
+  <BR> Xanh - đoán đúng số của máy tính
+  <br> Vàng - số đoán nhỏ hơn số của máy tính
+  <br> Đỏ - số đoán lớn hơn số của máy tính
+  <hr>
+  <p> Nhập vào: <input type="number" id="soNhapVao" /> </p>
+  <button onclick="kiemTraKetQua()">Xem kết quả</button>
+  <button onclick="resetKQ()">Chơi lại (reset game)</button>
+  <hr>
+  <h1>KẾT QUẢ</h1>
+  <p id="KetQua"></p>
+  <hr>
+
+</body>
+<script>
+  resetKQ();
+  function resetKQ() {
+    soKetQua = Math.floor((Math.random() * 100) + 1);
+  }
+  function kiemTraKetQua() {
+    soDoan = document.getElementById("soNhapVao").value;
+    if (soDoan == soKetQua) doiColour("green");
+    if (soDoan < soKetQua) doiColour("yellow");
+    if (soDoan > soKetQua) doiColour("red");
+  }
+  function doiColour(mau) {
+    document.getElementById("KetQua").innerHTML =
+      "<svg width='800' height='200'>"
+      + "<circle cx=100 cy=100 r=39 fill='" + mau + "'></circle>"
+      + "</svg>";
+  }
+</script>
+
+</html>
