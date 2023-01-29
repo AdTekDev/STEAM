@@ -1,0 +1,38 @@
+<html>
+
+<body onkeypress="NhanPhim(event)">
+
+
+  <hr>
+  <h1> Trò chơi Di chuyển Chữ nhờ bấm phím: </h1>
+
+  <br>
+  <hr>
+
+  <hr>
+  <h1>KẾT QUẢ</h1>
+  <p id="KetQua"></p>
+  <hr>
+
+</body>
+<script>
+  function NhanPhim(event) {
+    mau = "grey";
+    if (event.key == "a") mau = "red";
+    else if (event.key == "b") mau = "green";
+    else if (event.key == "c") mau = "yellow";
+    else if (event.key == "d") mau = "pink";
+    else if (event.key == "e") mau = "purple";
+    else mau = "cyan";
+
+    doiColour(mau);
+  }
+  function doiColour(mau) {
+    document.getElementById("KetQua").innerHTML =
+      "<svg width='900' height='200'>"
+      + "<circle cx=100 cy=100 r=39 fill='" + mau + "'></circle>"
+      + "</svg>";
+  }
+</script>
+
+</html>
