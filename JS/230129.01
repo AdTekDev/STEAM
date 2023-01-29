@@ -1,0 +1,93 @@
+<html>
+
+<body>
+
+  <hr>
+  <h1> Trò chơi đoán số có 6 chữ số (000000..999999) - v0.3: </h1>
+  <BR> Xanh - số đoán đúng của vị trí
+  <br> Đỏ - số bị đoán sai
+  <br> Vàng - số này giống với số ở vị trí khác
+  <hr>
+  <p> Nhập vào: <input type="number" id="soNhapVao" /> </p>
+  <button onclick="kiemTraKetQua()">Xem kết quả</button>
+  <button onclick="resetKQ()">Chơi lại (reset game)</button>
+  <hr>
+  <h1>KẾT QUẢ</h1>
+  <p id="KetQua"></p>
+  <hr>
+
+</body>
+<script>
+  resetKQ();
+  // 3456   3 4 5 6 
+  function resetKQ() {
+    soKetQua = Math.floor((Math.random() * 1000000) + 1);
+    arraySoKetQua = [
+      soKetQua % 10,
+      Math.floor(soKetQua / 10) % 10,
+      Math.floor(soKetQua / 100) % 10,
+      Math.floor(soKetQua / 1000) % 10,
+      Math.floor(soKetQua / 10000) % 10,
+      Math.floor(soKetQua / 100000) % 10
+    ];
+  }
+
+  function xacDinhMau(kq, doan, mau, thutu) {
+    if (doan[thutu] == kq[thutu]) {
+      mau[thutu] = "green";
+    } else if (
+      doan[thutu] == kq[0]
+      || doan[thutu] == kq[1]
+      || doan[thutu] == kq[2]
+      || doan[thutu] == kq[3]
+      || doan[thutu] == kq[4]
+      || doan[thutu] == kq[5]
+    ) {
+      mau[thutu] = "yellow";
+    } else {
+      mau[thutu] = "red";
+    }
+  }
+
+  function kiemTraKetQua() {
+    soDoan = parseInt(document.getElementById("soNhapVao").value);
+    arraySoDoan = [
+      soDoan % 10,
+      Math.floor(soDoan / 10) % 10,
+      Math.floor(soDoan / 100) % 10,
+      Math.floor(soDoan / 1000) % 10,
+      Math.floor(soDoan / 10000) % 10,
+      Math.floor(soDoan / 100000) % 10
+    ];
+    MauCacSo = [
+      "gray",
+      "gray",
+      "gray",
+      "gray",
+      "gray",
+      "gray"
+    ]
+
+    xacDinhMau(arraySoKetQua, arraySoDoan, MauCacSo, 0);
+    xacDinhMau(arraySoKetQua, arraySoDoan, MauCacSo, 1);
+    xacDinhMau(arraySoKetQua, arraySoDoan, MauCacSo, 2);
+    xacDinhMau(arraySoKetQua, arraySoDoan, MauCacSo, 3);
+    xacDinhMau(arraySoKetQua, arraySoDoan, MauCacSo, 4);
+    xacDinhMau(arraySoKetQua, arraySoDoan, MauCacSo, 5);
+
+    doiColour();
+  }
+  function doiColour() {
+    document.getElementById("KetQua").innerHTML =
+      "<svg width='800' height='200'>"
+      + "<circle cx=100 cy=100 r=39 fill='" + MauCacSo[5] + "'></circle>"
+      + "<circle cx=200 cy=100 r=39 fill='" + MauCacSo[4] + "'></circle>"
+      + "<circle cx=300 cy=100 r=39 fill='" + MauCacSo[3] + "'></circle>"
+      + "<circle cx=400 cy=100 r=39 fill='" + MauCacSo[2] + "'></circle>"
+      + "<circle cx=500 cy=100 r=39 fill='" + MauCacSo[1] + "'></circle>"
+      + "<circle cx=600 cy=100 r=39 fill='" + MauCacSo[0] + "'></circle>"
+      + "</svg>";
+  }
+</script>
+
+</html>
