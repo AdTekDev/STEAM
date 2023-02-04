@@ -1,0 +1,53 @@
+<html>
+
+<body onkeypress="NhanPhim(event)">
+
+
+  <hr>
+  <h1> Trò chơi Di chuyển "Hình" nhờ bấm phím: </h1>
+
+  <br>
+  <hr>
+
+  <hr>
+  <h1>KẾT QUẢ</h1>
+  <p id="KetQua"></p>
+  <hr>
+
+</body>
+<script>
+  mau = "grey";
+  xHinh = 100;
+  yHinh = 100;
+  function NhanPhim(event) {
+
+    if (event.key == "z") mau = "red";
+    else if (event.key == "x") mau = "green";
+    else if (event.key == "c") mau = "yellow";
+    else if (event.key == "v") mau = "pink";
+    else if (event.key == "b") mau = "purple";
+    else if (event.key == "n") mau = "cyan";
+
+    if (event.key == "w") {
+      if (yHinh > 10) yHinh = yHinh - 10;
+    } else if (event.key == "s") {
+      if (yHinh < 500) yHinh = yHinh + 10;
+    } else if (event.key == "a") {
+      if (xHinh > 10) xHinh = xHinh - 10;
+    } else if (event.key == "d") {
+      if (xHinh < 900) xHinh = xHinh + 10;
+    }
+
+    doiColour(mau, xHinh, yHinh);
+  }
+  function doiColour(mau, x, y) {
+    document.getElementById("KetQua").innerHTML =
+      "<svg width='900' height='200'>"
+      + "<circle cx=" + x
+      + " cy=" + y
+      + " r=39 fill='" + mau + "'></circle>"
+      + "</svg>";
+  }
+</script>
+
+</html>
