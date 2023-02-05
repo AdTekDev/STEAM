@@ -1,0 +1,63 @@
+<html>
+
+<head>
+  <style>
+    body {
+      width: 100%;
+      background-image: url("bg-001.png");
+    }
+  </style>
+</head>
+
+<body onkeypress="NhanPhim(event)">
+
+
+  <hr>
+  <h1> Trò chơi Di chuyển "Hình" khủng long nhờ bấm phím: </h1>
+
+  <br>
+  <hr>
+
+  <hr>
+  <h1>KẾT QUẢ</h1>
+  <p id="KetQua"></p>
+
+
+  <hr>
+
+</body>
+<script>
+  xHinh = 100;
+  yHinh = 100;
+  vTocDo = 10;
+
+  doiViTriHinh(xHinh, yHinh);
+
+  function NhanPhim(event) {
+
+    if (event.key == "w") {
+      if (yHinh > 0) yHinh = yHinh - vTocDo;
+    } else if (event.key == "s") {
+      if (yHinh < 600) yHinh = yHinh + vTocDo;
+    } else if (event.key == "a") {
+      if (xHinh > 0) xHinh = xHinh - vTocDo;
+    } else if (event.key == "d") {
+      if (xHinh < 900) xHinh = xHinh + vTocDo;
+    }
+    doiViTriHinh(xHinh, yHinh);
+  }
+
+
+  function doiViTriHinh(x, y) {
+    document.getElementById("KetQua").innerHTML =
+      "<svg width='900' height='600'>"
+      + "<image href='RongNho01.gif' height='50' width='80'"
+      + " x=" + x
+      + " y=" + y
+      + "/>"
+      + "</svg>";
+  }
+
+</script>
+
+</html>
