@@ -1,0 +1,85 @@
+<html>
+
+<head>
+  <style>
+    body {
+      width: 100%;
+      background-image: url("bg-001.png");
+    }
+  </style>
+</head>
+
+<body onkeypress="NhanPhim(event)">
+
+
+  <hr>
+  <h1> Trò chơi Di chuyển "Hình" khủng long nhờ bấm phím: </h1>
+
+  <br>
+  <hr>
+
+  <hr>
+  <h1>KẾT QUẢ</h1>
+  <p id="KetQua"></p>
+
+
+  <hr>
+
+</body>
+<script>
+  Player01_x = 100;
+  Player01_y = 100;
+  Player01_vTocDo = 10;
+
+  Player02_x = 300;
+  Player02_y = 200;
+  Player02_vTocDo = 10;
+
+  doiViTriHinh(xHinh, yHinh);
+
+  function NhanPhim(event) {
+
+    if (event.key == "w") {
+      if (Player01_y > 0) Player01_y = Player01_y - Player01_vTocDo;
+    } else if (event.key == "s") {
+      if (Player01_y < 600) Player01_y = Player01_y + Player01_vTocDo;
+    } else if (event.key == "a") {
+      if (Player01_x > 0) Player01_x = Player01_x - Player01_vTocDo;
+    } else if (event.key == "d") {
+      if (Player01_x < 900) Player01_x = Player01_x + Player01_vTocDo;
+    }
+
+    if (event.key == "i") {
+      if (Player02_y > 0) Player02_y = Player02_y - Player02_vTocDo;
+    } else if (event.key == "k") {
+      if (Player02_y < 600) Player02_y = Player02_y + Player02_vTocDo;
+    } else if (event.key == "j") {
+      if (Player02_x > 0) Player02_x = Player02_x - Player02_vTocDo;
+    } else if (event.key == "l") {
+      if (Player02_x < 900) Player02_x = Player02_x + Player02_vTocDo;
+    }
+    doiViTriHinh();
+  }
+
+
+  function doiViTriHinh() {
+    document.getElementById("KetQua").innerHTML =
+      "<svg width='900' height='600'>"
+      // Player - người chơi 
+      + "<image href='RongNho01.gif' height='50' width='80'"
+      + " x=" + Player01_x
+      + " y=" + Player01_y
+      + " />"
+
+      // Máy chơi - tank02  
+      + "<image href='tank-002.png' height='50' width='80'"
+      + " x=" + Player02_x
+      + " y=" + Player02_y
+      + " />"
+
+      + "</svg>";
+  }
+
+</script>
+
+</html>
