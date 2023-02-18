@@ -1,0 +1,87 @@
+<html>
+
+<head>
+  <style>
+    body {
+      width: 100%;
+      background-image: url("bg-001.png");
+    }
+  </style>
+</head>
+
+<body onkeypress="NhanPhim(event)">
+
+  <h1> Trò chơi - GAME Đánh chặn : </h1>
+  <p>
+    Player 1: di chuyển từ trái qua phải , phải là đích (v =20)
+    Player 2: sẽ chặn lại người chơi bằng cách di chuyển lên xuống tại 1 vùng; (v = 10)
+    Player 1 sẽ thua nếu không chạy qua được, hoặc bị đụng player 2
+  </p>
+  <hr>
+  <p id="KetQua"></p>
+</body>
+
+<script>
+  Winner = 0;
+
+  Player01_x = 20;
+  Player01_y = 100;
+  Player01_vTocDo = 20;
+
+  Player02_x = 600;
+  Player02_y = 200;
+  Player02_vTocDo = 10;
+
+  doiViTriHinh();
+
+  function NhanPhim(event) {
+
+    if (event.key == "a") {
+      if (Player01_x > 0) Player01_x = Player01_x - Player01_vTocDo;
+    } else if (event.key == "d") {
+      if (Player01_x < 900) Player01_x = Player01_x + Player01_vTocDo;
+    }
+
+    if (event.key == "i") {
+      if (Player02_y > 0) Player02_y = Player02_y - Player02_vTocDo;
+    } else if (event.key == "k") {
+      if (Player02_y < 600) Player02_y = Player02_y + Player02_vTocDo;
+    }
+
+    if (Player01_x > 800 && Player01_y >= 100 && Player01_y < 300)
+      Winner = 1;
+    else if (Player02_x > 800 && Player02_y >= 100 && Player02_y < 300)
+      Winner = 2;
+
+    if (Winner == 0) {
+      doiViTriHinh();
+    } else {
+      alert("Người chiến thắng là Player " + Winner);
+    }
+
+  }
+
+
+  function doiViTriHinh() {
+    document.getElementById("KetQua").innerHTML =
+      "<svg width='900' height='600'>"
+      // Đích đến 
+      + "<rect x='800' y='100' width='150' height='200' style='fill:pink;stroke-width:3;stroke:cyan' />"
+
+      // Player - người chơi 
+      + "<image href='RongNho01.gif' height='50' width='80'"
+      + " x=" + Player01_x
+      + " y=" + Player01_y
+      + " />"
+
+      // Máy chơi - tank02  
+      + "<image href='tank-002.png' height='50' width='80'"
+      + " x=" + Player02_x
+      + " y=" + Player02_y
+      + " />"
+      + "</svg>";
+  }
+
+</script>
+
+</html>
