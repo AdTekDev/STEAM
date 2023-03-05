@@ -1,0 +1,257 @@
+<html>
+
+<head>
+  <style>
+    body {
+      width: 100%;
+      background-image: url("bg-001.png");
+    }
+  </style>
+</head>
+
+<body onkeypress="NhanPhim(event)">
+
+  <h1> Trò chơi - GAME Đánh chặn : </h1>
+  <p>
+    Player 1: di chuyển từ trái qua phải , phải là đích (v =20)
+    Player 2: sẽ chặn lại người chơi bằng cách di chuyển lên xuống tại 1 vùng; (v = 10)
+    Sẽ có vật cản trên đường đi của P1
+    P2 sẽ có tốc độ chậm
+    Player 1 sẽ thua nếu không chạy qua được, hoặc bị đụng player 2
+  </p>
+  <hr>
+  <p id="KetQua"></p>
+</body>
+
+<script>
+  Winner = 0;
+
+  Player01_x = 20;
+  Player01_y = 100;
+  Player01_vTocDo = 20;
+  Player01_SoMang = 3;
+
+  Player02_x = 600;
+  Player02_y = 200;
+  Player02_vTocDo = 10;
+
+  vatcan01_x = 150;
+  vatcan01_y = 100;
+  vatcan01_r = 30;
+
+  vatcan02_x = 250;
+  vatcan02_y = 250;
+  vatcan02_r = 30;
+
+  vatcan03_x = 350;
+  vatcan03_y = 500;
+  vatcan03_r = 30;
+
+  vatcan04_x = 450;
+  vatcan04_y = 650;
+  vatcan04_r = 30;
+
+  dx01 = 0; huong01 = 1;
+  dx02 = 0; huong02 = -1;
+  dx03 = 0; huong03 = 1;
+  dx04 = 0; huong04 = -1;
+
+  setInterval(ThayDoiViTriVatCan, 600);
+  doiViTriHinh();
+
+  ///---------------------------------------
+
+  function ThayDoiViTriVatCan() {
+    dx01 = dx01 + huong01 * 5;
+    if (dx01 <= -50) {
+      dx01 = -50;
+      huong01 = +1;
+    }
+    if (dx01 >= 50) {
+      dx01 = 50;
+      huong01 = -1;
+    }
+
+    dx02 = dx02 + huong02 * 5;
+    if (dx02 <= -50) {
+      dx02 = -50;
+      huong02 = +1;
+    }
+    if (dx02 >= 50) {
+      dx02 = 50;
+      huong02 = -1;
+    }
+
+    dx03 = dx03 + huong03 * 5;
+    if (dx03 <= -50) {
+      dx03 = -50;
+      huong03 = +1;
+    }
+    if (dx03 >= 50) {
+      dx03 = 50;
+      huong03 = -1;
+    }
+
+    dx04 = dx04 + huong04 * 5;
+    if (dx04 <= -50) {
+      dx04 = -50;
+      huong04 = +1;
+    }
+    if (dx04 >= 50) {
+      dx04 = 50;
+      huong04 = -1;
+    }
+
+    doiViTriHinh();
+  }
+
+
+  function NhanPhim(event) {
+
+
+    // Di chuyen 1
+    if (event.key == "a") {
+      if (Player01_x > 0) Player01_x = Player01_x - Player01_vTocDo;
+    } else if (event.key == "d") {
+      if (Player01_x < 900) Player01_x = Player01_x + Player01_vTocDo;
+    }
+    if (event.key == "w") {
+      if (Player01_y > 0) Player01_y = Player01_y - Player01_vTocDo;
+    } else if (event.key == "s") {
+      if (Player01_y < 600) Player01_y = Player01_y + Player01_vTocDo;
+    }
+
+
+    // di chuyen 2
+    if (event.key == "i") {
+      if (Player02_y > 0) Player02_y = Player02_y - Player02_vTocDo;
+    } else if (event.key == "k") {
+      if (Player02_y < 600) Player02_y = Player02_y + Player02_vTocDo;
+    }
+
+    // Xet vat can 1
+    if (
+      ((Player01_x >= vatcan01_x + dx01 - 30 - 50)
+        && (Player01_x < vatcan01_x + dx01 + 30)
+        && (Player01_y >= vatcan01_y - 80)
+        && (Player01_y <= vatcan01_y + 30))
+    ) {
+      console.log("ko di chuyển 1");
+      Player01_x = vatcan01_x + dx01 - 30 - 50 - 5;
+    }
+
+    // Xet vat can 2
+    if (
+      ((Player01_x >= vatcan02_x + dx02 - 30 - 50)
+        && (Player01_x < vatcan02_x + dx02 + 30)
+        && (Player01_y >= vatcan02_y - 80)
+        && (Player01_y <= vatcan02_y + 30))
+    ) {
+      console.log("ko di chuyển 1");
+      Player01_x = vatcan02_x + dx02 - 30 - 50 - 5;
+    }
+
+    // Xet vat can 3
+    if (
+      ((Player01_x >= vatcan03_x + dx03 - 30 - 50)
+        && (Player01_x < vatcan03_x + dx03 + 30)
+        && (Player01_y >= vatcan03_y - 80)
+        && (Player01_y <= vatcan03_y + 30))
+    ) {
+      console.log("ko di chuyển 1");
+      Player01_x = vatcan03_x + dx03 - 30 - 50 - 5;
+    }
+
+    // Xet vat can 4
+    if (
+      ((Player01_x >= vatcan04_x + dx04 - 30 - 50)
+        && (Player01_x < vatcan04_x + dx04 + 30)
+        && (Player01_y >= vatcan04_y - 80)
+        && (Player01_y <= vatcan04_y + 30))
+    ) {
+      console.log("ko di chuyển 1");
+      Player01_x = vatcan04_x + dx04 - 30 - 50 - 5;
+    }
+
+
+
+
+    // xet thang
+    if (Player01_x > 700)
+      Winner = 1;
+    else if (
+      Player01_x <= Player02_x
+      && Player02_x <= Player01_x + 80
+
+      && Player01_y <= Player02_y
+      && Player02_y <= Player01_y + 50
+    ) {
+      Player01_x = 20;
+      Player01_y = 100;
+      Player01_SoMang--;
+      if (Player01_SoMang <= 0)
+        Winner = 2;
+    }
+
+
+    if (Winner == 0) {
+      doiViTriHinh();
+    } else {
+      alert("Người chiến thắng là Player " + Winner);
+    }
+
+  }
+
+
+  function doiViTriHinh() {
+    document.getElementById("KetQua").innerHTML =
+      "<svg width='900' height='800'>"
+      // Đích đến 
+      + "<rect x='800' y='100' width='150' height='200' style='fill:pink;stroke-width:3;stroke:cyan' />"
+
+      // Player - người chơi 
+      + "<image href='RongNho01.gif' height='50' width='80'"
+      + " x=" + Player01_x
+      + " y=" + Player01_y
+      + " />"
+
+      // Máy chơi - tank02  
+      + "<image href='tank-002.png' height='50' width='80'"
+      + " x=" + Player02_x
+      + " y=" + Player02_y
+      + " />"
+
+      // Vật cản  
+      + "<circle   "
+      + " cx=" + (vatcan01_x + dx01)
+      + " cy=" + vatcan01_y
+      + " r=" + vatcan01_r
+      + " />"
+
+      + "<circle   "
+      + " cx=" + (vatcan02_x + dx02)
+      + " cy=" + vatcan02_y
+      + " r=" + vatcan02_r
+      + " fill='magenta' />"
+
+      + "<circle   "
+      + " cx=" + (vatcan03_x + dx03)
+      + " cy=" + vatcan03_y
+      + " r=" + vatcan03_r
+      + " fill='cyan' />"
+
+      + "<circle   "
+      + " cx=" + (vatcan04_x + dx04)
+      + " cy=" + vatcan04_y
+      + " r=" + vatcan04_r
+      + " fill='red' />"
+
+
+      + "</svg>";
+
+
+  }
+
+</script>
+
+</html>
