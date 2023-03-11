@@ -1,0 +1,198 @@
+<html>
+
+<head>
+  <style>
+    body {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body onkeypress="NhanPhim(event)">
+
+  <h1> Trò chơi - pac-MAN (đơn giản) : </h1>
+  <p>
+    Player 1: pac-Man (người chơi điều khiển)
+  </p>
+  Pac-Man (パックマン Pakkuman) là một trò chơi arcade được phát triển bởi Namco và phát hành đầu tiên tại Nhật Bản vào 22
+  tháng 5 năm 1980.
+  Người chơi điều khiển Pac-Man trong một mê cung và ăn các chấm pac (pac-dots). Nếu người chơi ăn hết các chấm pac thì
+  Pac-Man được đưa qua màn chơi mới.
+  https://vi.wikipedia.org/wiki/Pac-Man
+  <br> đụng hạt đậu, ăn nó --> tăng điểm cho người chơi và hạt đậu biến mất
+  <hr>
+  <p id="KetQua"></p>
+</body>
+
+<script>
+  Winner = 0;
+
+  Player01_x = 20;
+  Player01_y = 100;
+  Player01_vTocDo = 20;
+  Player01_SoMang = 3;
+  Player01_Score = 0;
+
+
+
+  HatDau_PacDOT01_x = 150;
+  HatDau_PacDOT01_y = 100;
+  HatDau_PacDOT01_r = 30;
+  HatDau_PacDOT01_Color = "red";
+  HatDau_PacDOT01_Con = true;
+
+  HatDau_PacDOT02_x = 250;
+  HatDau_PacDOT02_y = 250;
+  HatDau_PacDOT02_r = 30;
+  HatDau_PacDOT02_Color = "red";
+  HatDau_PacDOT02_Con = true;
+
+  HatDau_PacDOT03_x = 350;
+  HatDau_PacDOT03_y = 500;
+  HatDau_PacDOT03_r = 30;
+  HatDau_PacDOT03_Color = "red";
+  HatDau_PacDOT03_Con = true;
+
+  HatDau_PacDOT04_x = 450;
+  HatDau_PacDOT04_y = 650;
+  HatDau_PacDOT04_r = 30;
+  HatDau_PacDOT04_Color = "red";
+  HatDau_PacDOT04_Con = true;
+
+  doiViTriHinh();
+
+  ///---------------------------------------
+
+  function NhanPhim(event) {
+
+
+    // Di chuyen 1
+    if (event.key == "a") {
+      if (Player01_x > 0) Player01_x = Player01_x - Player01_vTocDo;
+    } else if (event.key == "d") {
+      if (Player01_x < 900) Player01_x = Player01_x + Player01_vTocDo;
+    }
+    if (event.key == "w") {
+      if (Player01_y > 0) Player01_y = Player01_y - Player01_vTocDo;
+    } else if (event.key == "s") {
+      if (Player01_y < 600) Player01_y = Player01_y + Player01_vTocDo;
+    }
+
+
+    // Xet vat can 1
+    if (
+      ((Player01_x >= HatDau_PacDOT01_x - 30 - 50)
+        && (Player01_x < HatDau_PacDOT01_x + 30)
+        && (Player01_y >= HatDau_PacDOT01_y - 80)
+        && (Player01_y <= HatDau_PacDOT01_y + 30))
+    ) {
+      Player01_Score += 100;
+      HatDau_PacDOT01_Color = "gray";
+      HatDau_PacDOT01_Con = false;
+    }
+
+    // Xet vat can 2
+    if (
+      ((Player01_x >= HatDau_PacDOT02_x - 30 - 50)
+        && (Player01_x < HatDau_PacDOT02_x + 30)
+        && (Player01_y >= HatDau_PacDOT02_y - 80)
+        && (Player01_y <= HatDau_PacDOT02_y + 30))
+    ) {
+      Player01_Score += 100;
+      HatDau_PacDOT02_Color = "gray";
+      HatDau_PacDOT02_Con = false;
+    }
+
+    // Xet vat can 3
+    if (
+      ((Player01_x >= HatDau_PacDOT03_x - 30 - 50)
+        && (Player01_x < HatDau_PacDOT03_x + 30)
+        && (Player01_y >= HatDau_PacDOT03_y - 80)
+        && (Player01_y <= HatDau_PacDOT03_y + 30))
+    ) {
+      Player01_Score += 100;
+      HatDau_PacDOT03_Color = "gray";
+      HatDau_PacDOT03_Con = false;
+    }
+
+    // Xet vat can 4
+    if (
+      ((Player01_x >= HatDau_PacDOT04_x - 30 - 50)
+        && (Player01_x < HatDau_PacDOT04_x + 30)
+        && (Player01_y >= HatDau_PacDOT04_y - 80)
+        && (Player01_y <= HatDau_PacDOT04_y + 30))
+    ) {
+      Player01_Score += 100;
+      HatDau_PacDOT04_Color = "gray";
+      HatDau_PacDOT04_Con = false;
+    }
+
+
+
+
+    // xet thang
+    if (!HatDau_PacDOT01_Con
+      && !HatDau_PacDOT02_Con
+      && !HatDau_PacDOT03_Con
+      && !HatDau_PacDOT04_Con)
+      Winner = 1;
+
+
+
+    if (Winner == 0) {
+      doiViTriHinh();
+    } else {
+      alert("Người choi da chiến thắng ");
+    }
+
+  }
+
+
+  function doiViTriHinh() {
+    document.getElementById("KetQua").innerHTML =
+      "<svg width='900' height='800'>"
+      // Player - người chơi  pacman
+      + "<image href='pacman.png' height='60' width='60'"
+      + " x=" + Player01_x
+      + " y=" + Player01_y
+      + " />"
+
+
+      // Vật cản  
+      + "<circle   "
+      + " cx=" + HatDau_PacDOT01_x
+      + " cy=" + HatDau_PacDOT01_y
+      + " r=" + HatDau_PacDOT01_r
+      + " fill=" + HatDau_PacDOT01_Color
+      + " />"
+
+      + "<circle   "
+      + " cx=" + HatDau_PacDOT02_x
+      + " cy=" + HatDau_PacDOT02_y
+      + " r=" + HatDau_PacDOT02_r
+      + " fill=" + HatDau_PacDOT02_Color
+      + " />"
+
+      + "<circle   "
+      + " cx=" + HatDau_PacDOT03_x
+      + " cy=" + HatDau_PacDOT03_y
+      + " r=" + HatDau_PacDOT03_r
+      + " fill=" + HatDau_PacDOT03_Color
+      + "  />"
+
+      + "<circle   "
+      + " cx=" + HatDau_PacDOT04_x
+      + " cy=" + HatDau_PacDOT04_y
+      + " r=" + HatDau_PacDOT04_r
+      + " fill=" + HatDau_PacDOT04_Color
+      + "  />"
+
+
+      + "</svg>";
+
+
+  }
+
+</script>
+
+</html>
