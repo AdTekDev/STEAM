@@ -1,0 +1,113 @@
+<html>
+
+<head>
+  <script src="script.js"></script>
+</head>
+
+<body onkeypress="NhanPhim(event)">
+
+  <h1> Trò chơi - pac-MAN (đơn giản) : </h1>
+  <p>
+    Player 1: pac-Man (người chơi điều khiển)
+  </p>
+  Pac-Man (パックマン Pakkuman) là một trò chơi arcade được phát triển bởi Namco và phát hành đầu tiên tại Nhật Bản vào 22
+  tháng 5 năm 1980.
+  Người chơi điều khiển Pac-Man trong một mê cung và ăn các chấm pac (pac-dots). Nếu người chơi ăn hết các chấm pac thì
+  Pac-Man được đưa qua màn chơi mới.
+  https://vi.wikipedia.org/wiki/Pac-Man
+  <br> đụng hạt đậu, ăn nó --> tăng điểm cho người chơi và hạt đậu biến mất
+  <hr>
+  <p id="KetQua"></p>
+</body>
+
+<script>
+  Winner = 0;
+
+  Player01_x = 20;
+  Player01_y = 100;
+  Player01_vTocDo = 20;
+  Player01_SoMang = 3;
+  Player01_Score = 0;
+
+
+  const HatDau01 = new HatDau_PacMan(150, 100, 30);
+  const HatDau02 = new HatDau_PacMan(250, 250, 30);
+  const HatDau03 = new HatDau_PacMan(350, 500, 30);
+  const HatDau04 = new HatDau_PacMan(450, 650, 30);
+
+  const HatDau05 = new HatDau_PacMan(450, 750, 30);
+
+  const ConMa01 = new Ghost_PacMan(500, 300, 30, 30, "ghost-pacman.png");
+
+  doiViTriHinh();
+
+  ///---------------------------------------
+
+  function NhanPhim(event) {
+
+    // Di chuyen 1
+    if (event.key == "a") {
+      if (Player01_x > 0) Player01_x = Player01_x - Player01_vTocDo;
+    } else if (event.key == "d") {
+      if (Player01_x < 900) Player01_x = Player01_x + Player01_vTocDo;
+    }
+    if (event.key == "w") {
+      if (Player01_y > 0) Player01_y = Player01_y - Player01_vTocDo;
+    } else if (event.key == "s") {
+      if (Player01_y < 600) Player01_y = Player01_y + Player01_vTocDo;
+    }
+
+    // Xet vat can pac-DOTs
+    Player01_Score += HatDau01.biDungPacMan(Player01_x, Player01_y, 60, 60);
+    Player01_Score += HatDau02.biDungPacMan(Player01_x, Player01_y, 60, 60);
+    Player01_Score += HatDau03.biDungPacMan(Player01_x, Player01_y, 60, 60);
+    Player01_Score += HatDau04.biDungPacMan(Player01_x, Player01_y, 60, 60);
+
+    // xet thang
+    if (!HatDau01.conKhong
+      && !HatDau02.conKhong
+      && !HatDau03.conKhong
+      && !HatDau04.conKhong)
+      Winner = 1;
+
+    // Xet dung Ghost
+    if (ConMa01.biDungPacMan(Player01_x, Player01_y, 60, 60)) {
+      Winner = -1;
+    }
+
+
+    if (Winner == 0) {
+      ConMa01.diChuyenNgauNhien();
+      doiViTriHinh();
+    } else if (Winner == -1) {
+      alert("Người choi da THUA roi ");
+    } else {
+      alert("Người choi da chiến thắng ");
+    }
+
+  }
+
+
+  function doiViTriHinh() {
+    document.getElementById("KetQua").innerHTML =
+      "<svg width='900' height='800'>"
+      // Player - người chơi  pacman
+      + "<image href='pacman.png' height='60' width='60'"
+      + " x=" + Player01_x
+      + " y=" + Player01_y
+      + " />"
+
+      // Vật cản  
+      + HatDau01.veHatDau()
+      + HatDau02.veHatDau()
+      + HatDau03.veHatDau()
+      + HatDau04.veHatDau()
+      + HatDau05.veHatDau()
+      + ConMa01.veGhost()
+
+      + "</svg>";
+  }
+
+</script>
+
+</html>
