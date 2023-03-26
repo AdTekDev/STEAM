@@ -1,0 +1,123 @@
+<html>
+
+<head>
+  <script src="script.js"></script>
+</head>
+
+<body onkeypress="NhanPhim(event)">
+
+  <h1> Trò chơi - pac-MAN (đơn giản) : </h1>
+  <p>
+    Player 1: pac-Man (người chơi điều khiển)
+  </p>
+  Pac-Man (パックマン Pakkuman) là một trò chơi arcade được phát triển bởi Namco và phát hành đầu tiên tại Nhật Bản vào 22
+  tháng 5 năm 1980.
+  Người chơi điều khiển Pac-Man trong một mê cung và ăn các chấm pac (pac-dots). Nếu người chơi ăn hết các chấm pac thì
+  Pac-Man được đưa qua màn chơi mới.
+  https://vi.wikipedia.org/wiki/Pac-Man
+  <br> đụng hạt đậu, ăn nó --> tăng điểm cho người chơi và hạt đậu biến mất
+  <hr>
+  <p id="KetQua"></p>
+</body>
+
+<script>
+  Winner = 0;
+
+  Player01_x = 20;
+  Player01_y = 100;
+  Player01_vTocDo = 20;
+  Player01_SoMang = 3;
+  Player01_Score = 0;
+
+  MaxX = 900;
+  MaxY = 900;
+
+  let DanhSachHatDau = [];
+  DanhSachHatDau.push(new HatDau_PacMan(150, 100, 20));
+  DanhSachHatDau.push(new HatDau_PacMan(250, 250, 20));
+  DanhSachHatDau.push(new HatDau_PacMan(350, 500, 20));
+  DanhSachHatDau.push(new HatDau_PacMan(450, 650, 20));
+  DanhSachHatDau.push(new HatDau_PacMan(450, 750, 20));
+  DanhSachHatDau.push(new HatDau_PacMan(450, 100, 20));
+  DanhSachHatDau.push(new HatDau_PacMan(650, 250, 20));
+
+  let DanhSachConMa = [];
+  DanhSachConMa.push(new Ghost_PacMan(500, 300, 30, 30, "ghost-pacman.png"));
+  DanhSachConMa.push(new Ghost_PacMan(400, 300, 30, 30, "ghost-pacman.png"));
+  DanhSachConMa.push(new Ghost_PacMan(450, 300, 30, 30, "ghost-pacman.png"));
+
+  doiViTriHinh();
+
+  ///---------------------------------------
+
+  function NhanPhim(event) {
+
+    // Di chuyen 1
+    if (event.key == "a") {
+      if (Player01_x > 0) Player01_x = Player01_x - Player01_vTocDo;
+    } else if (event.key == "d") {
+      if (Player01_x < MaxX) Player01_x = Player01_x + Player01_vTocDo;
+    }
+    if (event.key == "w") {
+      if (Player01_y > 0) Player01_y = Player01_y - Player01_vTocDo;
+    } else if (event.key == "s") {
+      if (Player01_y < MaxY) Player01_y = Player01_y + Player01_vTocDo;
+    }
+
+    // Xet vat can pac-DOTs
+    for (i = 0; i < DanhSachHatDau.length; i++) {
+      Player01_Score += DanhSachHatDau[i].biDungPacMan(Player01_x, Player01_y, 60, 60);
+    }
+
+    // xet thang - dem so hat dau khong con
+    Winner = 1;
+    for (i = 0; i < DanhSachHatDau.length; i++)
+      if (DanhSachHatDau[i].conKhong)
+        Winner = 0;
+
+    // Xet dung Ghost
+    for (i = 0; i < DanhSachConMa.length; i++)
+      if (DanhSachConMa[i].biDungPacMan(Player01_x, Player01_y, 60, 60)) {
+        Winner = -1;
+      }
+
+
+    if (Winner == 0) {
+      for (i = 0; i < DanhSachConMa.length; i++)
+        DanhSachConMa[i].diChuyenTheoHuong(Player01_x, Player01_y);   //diChuyenNgauNhien();
+      doiViTriHinh();
+    } else if (Winner == -1) {
+      alert("Người choi da THUA roi ");
+    } else {
+      alert("Người choi da chiến thắng ");
+    }
+
+  }
+
+
+  function doiViTriHinh() {
+    let innhtml =
+      "<svg "
+      + "width='" + MaxX + "'"
+      + "height='" + MaxY + "'>"
+      // Player - người chơi  pacman
+      + "<image href='pacman.png' height='60' width='60'"
+      + " x=" + Player01_x
+      + " y=" + Player01_y
+      + " />";
+
+    // Vật cản  
+    for (i = 0; i < DanhSachHatDau.length; i++)
+      innhtml = innhtml + DanhSachHatDau[i].veHatDau();
+
+    for (i = 0; i < DanhSachConMa.length; i++)
+      innhtml = innhtml + DanhSachConMa[i].veGhost();
+
+    innhtml = innhtml + "</svg>";
+
+    document.getElementById("KetQua").innerHTML = innhtml;
+  }
+
+</script>
+
+</html>
