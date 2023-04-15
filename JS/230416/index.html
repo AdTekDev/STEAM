@@ -1,0 +1,102 @@
+<html>
+
+<head>
+  <script src="script.js"></script>
+</head>
+
+<body onkeypress="NhanPhim(event)">
+
+  <h1> Trò chơi - Ping-Pong (đơn giản) : </h1>
+  <p>
+    Mô phỏng Trái Banh di chuyển
+  </p>
+  Banh sẽ di chuyển với tốc độ ban đầu là v, theo hướng Alpha; chậm dần theo thời gian
+  Banh sẽ bị bật lại nếu đụng tường
+  <br> ...
+  <hr>
+  <p id="ManHinhChoiGame"></p>
+</body>
+
+<script>
+  Winner = 0;
+
+  MaxX = 900;
+  MaxY = 900;
+  xKhung = 100;
+  yKhung = 100;
+  wKhung = 800;
+  hKhung = 600;
+
+  quangthoigian = 300;
+
+  traibanh = new TraiBanh(100, 100, 18, 80, 150);
+
+  player01 = new BiaDoBanh(xKhung + 10, 100, 20, 100, 10, 0);
+
+  player02 = new BiaDoBanh(xKhung + wKhung - 30, 100, 20, 100, 10, 0);
+
+  setInterval(MoPhongTheoTIME, quangthoigian);
+
+  ///---------------------------------------
+
+  function NhanPhim(event) {
+
+    if (event.key == "w") {
+      player01.diChuyen(xKhung, yKhung, xKhung + wKhung, yKhung + hKhung, 300, -1);
+    }
+    if (event.key == "s") {
+      player01.diChuyen(xKhung, yKhung, xKhung + wKhung, yKhung + hKhung, 300, 1);
+    }
+
+    if (event.key == "i") {
+      player02.diChuyen(xKhung, yKhung, xKhung + wKhung, yKhung + hKhung, 300, -1);
+    }
+    if (event.key == "k") {
+      player02.diChuyen(xKhung, yKhung, xKhung + wKhung, yKhung + hKhung, 300, 1);
+    }
+
+  }
+
+  function MoPhongTheoTIME() {
+    traibanh.diChuyen(100, 100, 800, 800, quangthoigian);
+    p1 = player01.DungBanh(traibanh.x, traibanh.y, traibanh.r);
+    if (p1 == -1 || p1 == 1 || p1 == 2) {
+      traibanh.bidung(0);
+    }
+
+    p2 = player02.DungBanh(traibanh.x, traibanh.y, traibanh.r);
+    if (p2 == -1 || p2 == 1 || p2 == 2) {
+      traibanh.bidung(1);
+    }
+    capNhatLaiManHinhChoiGame();
+  }
+
+
+  function capNhatLaiManHinhChoiGame() {
+    let innhtml =
+      "<svg "
+      + "width='" + MaxX + "'"
+      + "height='" + MaxY + "'>"
+      // Player - người chơi  
+      +
+      // Ban ping-pong
+      "<rect x="
+      + xKhung
+      + " y=" + yKhung
+      + " width=" + wKhung
+      + " height=" + hKhung
+      + " style='fill:rgb(180,180,180);stroke-width:3;stroke:pink' />";
+    // Trái Bóng 
+    innhtml = innhtml
+      + traibanh.veTraiBanh()
+      + player01.Ve()
+      + player02.Ve();
+
+    innhtml = innhtml + "</svg>";
+
+    document.getElementById("ManHinhChoiGame").innerHTML = innhtml;
+  }
+
+</script>
+
+</html>
