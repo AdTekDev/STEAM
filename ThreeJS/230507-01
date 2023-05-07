@@ -1,0 +1,70 @@
+// The three.js scene: the 3D world where you put objects
+const scene = new THREE.Scene();
+
+// The camera
+const camera = new THREE.PerspectiveCamera(
+  60,
+  window.innerWidth / window.innerHeight,
+  1,
+  10000
+);
+
+// The renderer: something that draws 3D objects onto the canvas
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0xaaaaaa, 1);
+// Append the renderer canvas into <body>
+document.body.appendChild(renderer.domElement);
+
+
+// A cube we are going to animate
+const box = {
+  // The geometry: the shape & size of the object
+  geometry: new THREE.BoxGeometry(1,1,1),
+  // The material: the appearance (color, texture) of the object
+  material: new THREE.MeshBasicMaterial({ color: 0x33ff55 , side: THREE.DoubleSide })
+};
+
+
+const boxA = new THREE.Mesh(box.geometry, box.material);
+boxA.position.set(2,0,0);
+
+const boxB = new THREE.Mesh(box.geometry, box.material);
+boxB.position.set(2,2,0);
+
+
+
+// Add the cube into the scene
+scene.add(boxA);
+scene.add(boxB);
+
+
+// Make the camera further from the cube so we can see it better
+camera.position.set(2,0,5);
+
+renderer.render(scene, camera);
+
+function dichuyen(phim) {
+  if (phim.key == "a") {
+    boxA.position.x -= 0.5;
+  }
+  if (phim.key == "d") {
+    boxA.position.x += 0.5;
+  }
+
+  if (phim.key == "s") {
+    boxA.position.y -= 0.5;
+  }
+  if (phim.key == "w") {
+    boxA.position.y += 0.5;
+  }
+
+  if (phim.key == "x") {
+    boxA.position.z -= 0.5;
+  }
+  if (phim.key == "z") {
+    boxA.position.z += 0.5;
+  }
+
+  renderer.render(scene, camera);
+}
