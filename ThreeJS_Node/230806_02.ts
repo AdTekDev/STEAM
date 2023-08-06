@@ -1,6 +1,7 @@
 /*
 Cho 1 danh sách các Tên Học Sinh trong lớp,
 -->  sắp xếp theo tứ tự ABC
+npm install -g ts-node typescript  
 */
 class HocSinh { 
     HoHS: string;
