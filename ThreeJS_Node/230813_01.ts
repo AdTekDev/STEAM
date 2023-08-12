@@ -15,6 +15,9 @@ class HocSinh {
         this.TenHS = ten;
         this.HoHS = ho;
         this.DiemTB = dtb;
+        this.NgaySinh = -1;
+        this.ThangSinh = -1;
+        this.NamSinh = -1;
     }
 
     capNhatDTB(dtb : number) : void {
@@ -54,4 +57,4 @@ for(i=0; i<N-1; i++) {
 
 console.log(dsHocSinhdaydu);
 
-// RYN:  npx ts-node 230813_01.ts
+// RUN:  npx   ts-node   230813_01.ts
