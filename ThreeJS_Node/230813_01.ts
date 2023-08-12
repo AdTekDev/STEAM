@@ -1,12 +1,15 @@
 /*
 Cho 1 danh sách các Tên Học Sinh trong lớp,
--->  sắp xếp theo tứ tự ABC
+-->  sắp xếp theo tứ tự DTB Cao -- Thap
 */
 // npm install -g ts-node typescript  
 class HocSinh { 
     HoHS: string;
     TenHS: string;
     DiemTB: number;
+    NgaySinh: number;
+    ThangSinh: number;
+    NamSinh: number;
     
     constructor(ho : string, ten : string, dtb : number) {
         this.TenHS = ten;
@@ -14,11 +17,15 @@ class HocSinh {
         this.DiemTB = dtb;
     }
 
-    nhapDTB(dtb : number) : void {
+    capNhatDTB(dtb : number) : void {
         this.DiemTB = dtb;
     }
 
-
+    capNhatNgaySinh(n: number, t:number, nam: number) : void {
+        this.NgaySinh = n;
+        this.ThangSinh = t;
+        this.NamSinh = nam;
+    }
 }
 
 let dsHocSinhdaydu : HocSinh[] = [
@@ -36,7 +43,7 @@ let i=0, j=0;
 
 for(i=0; i<N-1; i++) {
     for(j=0;j<N-1-i; j++) {
-        if (dsHocSinhdaydu[j].TenHS > dsHocSinhdaydu[j+1].TenHS)
+        if (dsHocSinhdaydu[j].DiemTB < dsHocSinhdaydu[j+1].DiemTB)
         {
             let ds = dsHocSinhdaydu[j];
             dsHocSinhdaydu[j] = dsHocSinhdaydu[j+1];
@@ -46,3 +53,5 @@ for(i=0; i<N-1; i++) {
 }
 
 console.log(dsHocSinhdaydu);
+
+// RYN:  npx ts-node 230813_01.ts
