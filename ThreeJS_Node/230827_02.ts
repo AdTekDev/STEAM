@@ -21,6 +21,18 @@ class  HinhTron {
     chobietDienTich() : number {
         return Math.PI * this.bankinh**2;
     }
+    xuatSVG() : string {
+        let str =  "";
+        str += "<svg  width='" + (Math.abs(this.x) + this.bankinh)
+            + "' height='" + (Math.abs(this.y) + this.bankinh) + "'> "
+            + " <circle cx='" + this.x 
+            + "' cy='" + this.y 
+            + "' r='" + this.bankinh
+            + "' stroke-width='3'  fill='red' > </svg>";
+
+
+        return str;
+    }
 }
 ///////////////////
 let  hcn01 = new HinhTron(100,100,10);
@@ -30,4 +42,6 @@ console.log( hcn01,
     hcn01.chobietDienTich() 
 );
 
+
+console.log(hcn01.xuatSVG())
 
