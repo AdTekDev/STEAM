@@ -13,3 +13,7 @@
 - https://www.w3schools.com/python/
 - https://www.kaggle.com/learn/python
 - https://realpython.com/learning-paths/python-basics/
+
+## Drive
+- https://drive.google.com/drive/folders/1-HLNSQ6JudFMfMO-PYfhzXQS55L8gOy_?usp=share_link
+  
