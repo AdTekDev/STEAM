@@ -1,3 +1,4 @@
+# giai phuong trinh bac 2
 
 a = float ( input("nhap he so A: ") )
 b = float ( input("nhap he so B: ") )
@@ -13,4 +14,10 @@ if (a == 0):
         print("Ptb I co nghiem ", -c/b)
 else:
     delta = b*b - 4*a*c
-  
+    if (delta > 0):
+        print("PTB2 co 2 nghiem pb ", -b + sqrt(delta), -b - sqrt(delta) )
+    elif (delta == 0):
+        print("PTB2 co nghiem kep ", -b / (2 * a) )
+    else:
+        print("PTB2 vo nghiem")
+              
