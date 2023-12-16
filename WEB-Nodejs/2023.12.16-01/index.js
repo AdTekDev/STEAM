@@ -51,9 +51,9 @@ app.get("/logout", (req, res) => {
 
 app.get("/sanpham", (req, res) => {
     let dssp = [
-        { title: "HP la con duong", brief : "la mot cuon sach tich cuc .."},
-        { title: "con duong tien toi hanh phuc", brief : "la mot cuon sach tich phan .."},
-        { title: "HP san pham may in", brief : "may in tot .."}
+        { title: "HP la con duong", brief : "la mot cuon sach tich cuc ..", linkImg : "/image/001.jpg"},
+        { title: "con duong tien toi hanh phuc", brief : "la mot cuon sach tich phan ..", linkImg : "/image/002.jpg"},
+        { title: "HP san pham may in", brief : "may in tot ..", linkImg : "/image/003.jpg"}
     ];
     res.render("sanpham", {booklist: dssp});
 })
