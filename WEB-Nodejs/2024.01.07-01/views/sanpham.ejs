@@ -28,9 +28,13 @@
   </body>
 
   <script>
+    giohang = {};
+
     function themVaoGioHang(id, title, price) {
       // TODO
       alert(title);
+      giohang[id] = [id, title, price, 1];
+      console.log(giohang);
     }
   </script>
 
