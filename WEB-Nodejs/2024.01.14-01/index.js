@@ -73,6 +73,22 @@ app.get("/giohang", (req, res) => {
     res.render("giohang", {booklist: []});
 })
 
+app.post("/giohang", (req, res) => {
+    console.log(req.body.dulieu);
+    dl = JSON.parse(req.body.dulieu);
+    bl = [];
+
+    for (var book in dl) {
+        bl.push({
+             "id": dl[book][0],
+             "title": dl[book][1],
+             "price": dl[book][2],
+             "quantity": dl[book][3]
+        });
+    }
+    res.render("giohang", {booklist: bl});
+})
+
 app.get("/thanhtoan", (req, res) => {
     res.sendFile(__dirname + "/views/thanhtoan.html")
 })
