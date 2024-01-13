@@ -11,7 +11,11 @@
 
     <p> DANH SÁCH SÀN PHẨM HIỆN BÁN TRÊN CỬA JA2NG  </p> 
 
-    <a href="/giohang">Giỏ hàng</a>
+    <form action="/giohang" method="post">
+      <input type="hidden" name="dulieu" value="" id="dulieu">
+      <input type="submit" value="Giỏ hàng" >
+    </form>
+    
 
     <% booklist.forEach(function(book){ %>
 
@@ -41,6 +45,8 @@
       } else {
         giohang[id] = [id, title, price, 1];
       }
+
+      document.getElementById("dulieu").value = JSON.stringify(giohang);
       
       console.log(giohang);
     }
