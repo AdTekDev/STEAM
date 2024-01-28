@@ -23,5 +23,9 @@ import matplotlib.pyplot as plt
 x = [hs['HoTen'] for hs in dshs]
 y = [hs['DTB'] for hs in dshs]
 
-plt.bar(x, y)
+bar_colors = ['pink', 'magenta', 'cyan', 'yellow']
+plt.bar(x, y, color=bar_colors)
+plt.title("So sánh điểm môn Lý của các HS")
+plt.xlabel("Họ tên")
+plt.ylabel("Điểm Lý")
 plt.show()
