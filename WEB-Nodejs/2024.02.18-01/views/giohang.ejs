@@ -23,7 +23,7 @@
         </td>
         <td> 
           <button onclick="giamSL(<%= book.id%>)">-</button>
-          <input type="number" width="50" id="number-<%= book.id%>" value="<%= book.quantity%>"> 
+          <input type="number"  onchange="thaydoi(<%= book.id%>)" width="50" id="number-<%= book.id%>" value="<%= book.quantity%>"> 
           <button onclick="tangSL(<%= book.id%>)">+</button> 
         </td>
         <td id="thanhtien-<%= book.id%>"><%= book.quantity*book.price%> </td>
@@ -42,6 +42,30 @@
 
   <script>
     tongsotien = <%=tongtien%>;
+
+    dssach = {};
+
+    function themSach(id, sl, price) {
+      dssach[id] = {sl: sl, price: price};
+    }
+
+    <% booklist.forEach(function(book){ %>
+      themSach("<%= book.id%>", <%= book.quantity%>, <%=book.price%>);
+    <% });  %>
+
+    function thaydoi(xid) {
+      //alert(dssach[xid]);
+      var xsl = document.getElementById("number-" + xid).value;
+      if (xsl < 1) { xsl = 1; }
+      if (xsl > 100) { xsl = 100; }
+      thanhtien = xsl * dssach[xid].price;
+      ttcu = dssach[xid].sl * dssach[xid].price;
+      tongsotien = tongsotien - ttcu + thanhtien;
+      document.getElementById("thanhtien-" + xid).innerText =  thanhtien;
+      document.getElementById("TongTien").innerText = tongsotien;
+      dssach[xid].sl = xsl;
+    }
+
     function giamSL(xid) {
       var xsl = document.getElementById("number-" + xid).value;
       if (xsl > 1) 
