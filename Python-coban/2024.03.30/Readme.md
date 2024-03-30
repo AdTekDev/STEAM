@@ -10,3 +10,7 @@
 - sns.heatmap
 - plt.xlabel
 - plt.ylabel
+
+## link gốc
+- https://www.kaggle.com/code/alexisbcook/bar-charts-and-heatmaps
+  
