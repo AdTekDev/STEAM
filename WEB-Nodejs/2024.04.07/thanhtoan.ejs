@@ -1,0 +1,153 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <h1>THANH TOÁN đơn hàng!</h1>   
+
+    <form method="post" action="/hoantat">
+
+        <div style="background-color: #becdec">
+            <h3>ĐỊA CHỈ GIAO HÀNG</h3>
+            <div class="mb-3 row">
+                <label for="HoTen" class="col-sm-2 col-form-label">Họ và tên người nhận</label>
+                <div class="col-sm-10">
+                <input type="text" class="form-control" id="HoTen">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="eMail" class="col-sm-2 col-form-label">eMail</label>
+                <div class="col-sm-10">
+                <input type="email" class="form-control" id="eMail">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="SoDienThoai" class="col-sm-2 col-form-label">Số điện thoại</label>
+                <div class="col-sm-10">
+                <input type="tel" class="form-control" id="SoDienThoai">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="QuocGia" class="col-sm-2 col-form-label">Quốc gia</label>
+                <div class="col-sm-10">
+                    <select class="form-select" aria-label="Default select example"  id="QuocGia">
+                        <option selected value="0">Việt nam</option>
+                        <option value="1">Lào</option>
+                        <option value="2">Campuchia</option>
+                        <option value="3">Thái Lan</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="DiaChi" class="col-sm-2 col-form-label">Địa chỉ chi tiết nơi nhận</label>
+                <div class="col-sm-10">
+                <input type="text" class="form-control" id="DiaChi">
+                </div>
+            </div>
+        </div>
+
+        <div style="background-color: #d8f0e8">
+            <h3>PHƯƠNG THỨC VẬN CHUYỂN</h3>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="GiaoHang" id="GiaoHangTC">
+                <label class="form-check-label" for="GiaoHangTC">
+                  Giao hàng tiêu chuẩn
+                </label>
+                <a id="GHTC_Tien">19.000đ</a>
+                <a id="GHTC_ThoiGian">Thứ 4, 3/4</a>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="GiaoHang" id="GiaoHangNhanh">
+                <label class="form-check-label" for="GiaoHangNhanh">
+                  Giao hàng nhanh                  
+                </label>
+                <a id="GHNH_Tien">50.000đ</a>
+                <a id="GHNH_ThoiGian">Thứ 2, 1/4</a>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="GiaoHang" id="GiaoHangSieuToc">
+                <label class="form-check-label" for="GiaoHangSieuToc">
+                  Giao hàng siêu tốc (2h)
+                </label>
+                <a id="GHST_Tien">90.000đ</a>
+                <a id="GHST_ThoiGian">CN, 31/3</a>
+            </div>
+
+        </div>
+
+        <div style="background-color: #eed8f0">
+            <h3>PHƯƠNG THỨC THANH TOÁN</h3>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="ThanhToan" id="TT_ViZalo">
+                <img width="40" src="https://cdn0.fahasa.com/skin/frontend/base/default/images/payment_icon/ico_zalopaycc.svg?q=105549" />
+                <label class="form-check-label" for="TT_ViZalo">
+                  Ví ZaloPay
+                </label>
+                <br><a> Nhập mã "ABC" để được giảm giá </a>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="ThanhToan" id="TT_ViVN">
+                <img width="40" src="https://cdn0.fahasa.com/skin/frontend/base/default/images/payment_icon/ico_zalopaycc.svg?q=105549" />
+                <label class="form-check-label" for="TT_ViVN">
+                  Ví VNPay
+                </label>
+                <br><a> Nhập mã "123" để được giảm giá </a>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="ThanhToan" id="TT_ViMomo">
+                <img width="40" src="https://cdn0.fahasa.com/skin/frontend/base/default/images/payment_icon/ico_zalopaycc.svg?q=105549" />
+                <label class="form-check-label" for="TT_ViMomo">
+                  Ví MoMo
+                </label>
+                <br><a> Nhập mã "qwe" để được giảm giá </a>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="ThanhToan" id="TT_Cash">
+                <img width="40" src="https://cdn0.fahasa.com/skin/frontend/base/default/images/payment_icon/ico_zalopaycc.svg?q=105549" />
+                <label class="form-check-label" for="TT_Cash">
+                  Thanh toán bằng tiền mặt
+                </label>
+                <br><a> Nhập mã "baba" để được giảm giá </a>
+            </div>
+
+        </div>
+
+        <div style="background-color: #f5d2dd">
+            <h3>MÃ KHUYẾN MÃI/MÃ QUÀ TẶNG</h3>
+
+            <div class="input-group mb-3">
+                <label for="HoTen" class="col-sm-2 col-form-label">Mã KM/Quà tặng</label>
+                
+                <input type="text" class="form-control" id="MKM">
+                <span class="input-group-text">
+                    <button type="button" class="btn btn-primary">Áp dụng</button>
+                </span>
+                
+            </div>
+        </div>
+
+
+        <br><span> Thành tiền:  <%= thanhtien%> </span>
+        <br><span> Tổng số tiền(VAT):  <%= tongtien%> </span>
+
+        <button type="submit" class="btn btn-primary">Xác nhận thanh toán</button>
+    </form>
+
+  </body>
+
+</html>
