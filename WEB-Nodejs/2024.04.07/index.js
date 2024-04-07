@@ -97,6 +97,13 @@ app.get("/thanhtoan", (req, res) => {
     res.render("thanhtoan", {tongtien: 300000, thanhtien:200000});
 })
 
+app.post("/hoantat", (req, res) => {
+    res.render("hoantat", {
+        tongtien: 300000, thanhtien:200000,
+        HoTen: "ABCD"
+    });
+})
+
 //-----------------------------------------------------
 app.listen(PORT, () => {
     console.log(`WEB da mo tai CONG ${PORT}`)
