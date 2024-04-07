@@ -98,9 +98,11 @@ app.get("/thanhtoan", (req, res) => {
 })
 
 app.post("/hoantat", (req, res) => {
+    console.log(req.body.HoTen, req.body.eMail);
     res.render("hoantat", {
         tongtien: 300000, thanhtien:200000,
-        HoTen: "ABCD"
+        HoTen: req.body.HoTen, eMail : req.body.eMail,
+
     });
 })
 
