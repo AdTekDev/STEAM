@@ -8,12 +8,12 @@ print( dulieu.shape )
 print( dulieu.columns )
 print( dulieu.head() )
 ## plot
-##plt.figure( figsize= (8,4) )
-plt.title("Quan hệ Dài và Rộng của đài hoa")
-plt.xlabel("Sepal Length (cm)")
-plt.ylabel("Sepal Width (cm)")
-#sns.scatterplot(data=dulieu, x="bmi", y="charges", hue="smoker" )
-sns.lmplot(data=dulieu, x="Sepal Length (cm)", y="Sepal Width (cm)"
-           , hue="Species")
+# sns.lmplot(data=dulieu, x="Sepal Length (cm)", y="Sepal Width (cm)", hue="Species")
+# sns.histplot(data=dulieu["Sepal Width (cm)"])
+# sns.kdeplot( data=dulieu["Petal Length (cm)"] , shade=True )
+
+sns.jointplot(x=dulieu['Petal Length (cm)'], y=dulieu['Sepal Width (cm)'], kind="kde")
+
+
 plt.show()
 
