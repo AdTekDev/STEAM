@@ -106,8 +106,14 @@ app.post("/hoantat", (req, res) => {
     res.render("hoantat", {
         tongtien: req.body.xTongTien, 
         thanhtien: req.body.xTongTien,
-        HoTen: req.body.HoTen, eMail : req.body.eMail,
-
+        HoTen: req.body.HoTen, 
+        eMail : req.body.eMail,
+        SoDienThoai : req.body.SoDienThoai,
+        QuocGia : req.body.QuocGia,
+        DiaChi : req.body.DiaChi,
+        GiaoHang : req.body.GiaoHang,
+        ThanhToan : req.body.ThanhToan,
+        MKM : req.body.MKM,
     });
 })
 
