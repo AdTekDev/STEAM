@@ -1,0 +1,38 @@
+[
+    { 
+        "id":1, 
+        "title": "HP la con duong", 
+        "brief" : "la mot cuon sach tich cuc ..", 
+        "linkImg" : "/image/001.jpg", 
+        "price":70000,
+        "size": "18x25",
+        "weight": 300
+     },
+    { 
+        "id":2, 
+        "title": "con duong tien toi hanh phuc", 
+        "brief" : "la mot cuon sach tich phan ..", 
+        "linkImg" : "/image/002.jpg", 
+        "price":80000,
+        "size": "18x25",
+        "weight": 500
+    },
+    { 
+        "id":3, 
+        "title": "HP san pham may in", 
+        "brief" : "may in tot ..", 
+        "linkImg" : "/image/003.jpg", 
+        "price":600000,
+        "size": "50x50x30",
+        "weight": 5600
+    },
+    { 
+        "id":4, 
+        "title": "Nguyên Phong", 
+        "brief" : "nhà thám hiểm và triết học ..", 
+        "linkImg" : "/image/003.jpg", 
+        "price":200000,
+        "size": "18x25",
+        "weight": 600
+    }
+]
