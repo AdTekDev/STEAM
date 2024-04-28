@@ -58,7 +58,7 @@
             <h3>PHƯƠNG THỨC VẬN CHUYỂN</h3>
 
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="GiaoHang" id="GiaoHangTC" value="GiaoHangTC" checked>
+                <input class="form-check-input" type="radio" name="GiaoHang" id="GiaoHangTC" value="GiaoHangTC" checked  onclick="GiaoHangLoai('TC');">
                 <label class="form-check-label" for="GiaoHangTC">
                   Giao hàng tiêu chuẩn
                 </label>
@@ -67,7 +67,7 @@
             </div>
 
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="GiaoHang" id="GiaoHangNhanh"  value="GiaoHangNhanh">
+                <input class="form-check-input" type="radio" name="GiaoHang" id="GiaoHangNhanh"  value="GiaoHangNhanh"  onclick="GiaoHangLoai('NH');">
                 <label class="form-check-label" for="GiaoHangNhanh">
                   Giao hàng nhanh                  
                 </label>
@@ -76,7 +76,7 @@
             </div>
 
             <div class="form-check" name="DIV_GHST">
-                <input class="form-check-input" type="radio" name="GiaoHang" id="GiaoHangSieuToc"  value="GiaoHangSieuToc">
+                <input class="form-check-input" type="radio" name="GiaoHang" id="GiaoHangSieuToc"  value="GiaoHangSieuToc"  onclick="GiaoHangLoai('ST');">
                 <label class="form-check-label" for="GiaoHangSieuToc">
                   Giao hàng siêu tốc (2h)
                 </label>
@@ -142,8 +142,18 @@
         </div>
 
 
-        <br><span> Thành tiền:  <%= thanhtien%> </span>
-        <br><span> Tổng số tiền(VAT):  <%= tongtien%> </span>
+        <br><span> Thành tiền:  
+            <a id="tienThanhTien"><%= thanhtien%></a> 
+        </span>
+        <br><span> Phí vận chuyển:  
+            <a id="tienVanChuyen">0</a> 
+        </span>
+        <br><span> Khuyến mãi:  
+            <a id="tienKhuyenMai">0</a> 
+        </span>
+        <br><span> Tổng số tiền cần thanh toán(VAT):  
+            <a id="tienTongSo"><%= tongtien%></a> 
+        </span>
 
         <input type="hidden" name="xTongTien" value="<%=tongtien%>" id="xTongTien">
             
@@ -154,13 +164,50 @@
   </body>
 
   <script>
-    function ThayDoiQuocGia() {
-        var qg = document.getElementById("QuocGia").value;       
+    var qg = 0;
+    var tienVanChuyen = 19000;
+    var tienKhuyenMai = 0; 
+    var tienThanhTien = <%= thanhtien%>;
+    var tienTongSo = <%= tongtien%>;
 
-        if (qg != 0) {
-            alert(qg);
-            document.getElementByName("DIV_GHST").hidden = true;
-        } 
+    function ThayDoiQuocGia() {
+        qg = document.getElementById("QuocGia").value;       
+        //alert(qg);
+
+        if (qg != 0) {            
+            document.getElementsByName("DIV_GHST")[0].hidden = true;
+
+            document.getElementById("GHTC_Tien").innerText = 50000;
+            document.getElementById("GHNH_Tien").innerText = 100000;
+        } else {
+            document.getElementsByName("DIV_GHST")[0].hidden = false;
+            document.getElementById("GHTC_Tien").innerText = 19000;
+            document.getElementById("GHNH_Tien").innerText = 50000;
+        }
+    }
+
+    function GiaoHangLoai(loai) {
+        if (qg == 0) {
+            if (loai == "TC") {
+                tienVanChuyen = 19000;
+            } else if (loai == "NH") {
+                tienVanChuyen = 50000;
+            } else {
+                tienVanChuyen = 100000;
+            }
+        } else {
+            if (loai == "TC") {
+                tienVanChuyen = 50000;
+            } else {
+                tienVanChuyen = 100000;
+            }
+        }
+
+        tienTongSo = tienThanhTien + tienVanChuyen  - tienKhuyenMai;
+
+        document.getElementById("tienVanChuyen").innerText = tienVanChuyen;
+        document.getElementById("tienTongSo").innerText = tienTongSo;
+
     }
   </script>
 </html>
