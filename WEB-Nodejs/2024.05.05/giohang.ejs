@@ -1,0 +1,196 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <h1>Giỏ hàng</h1>  
+
+    <p> Giỏ hàng hiện tại <a id="giotrong"></a> </p> 
+
+
+    <table class="table table-striped">
+      <tbody>
+    <% booklist.forEach(function(book){ %>
+      <tr  id="book-<%= book.id%>">
+        <td><%= book.id%> </td>
+        <td>
+          <h5 class="card-title"> <%= book.title %> </h5>
+          <p class="card-text" id="price-<%= book.id%>">  <%= book.price%> </p>
+        </td>
+        <td> 
+          <button onclick="giamSL(<%= book.id%>)">-</button>
+          <input type="number"  onchange="thaydoi(<%= book.id%>)" width="50" id="number-<%= book.id%>" value="<%= book.quantity%>"> 
+          <button onclick="tangSL(<%= book.id%>)">+</button> 
+        </td>
+        <td id="thanhtien-<%= book.id%>"><%= book.quantity*book.price%> </td>
+        <td> 
+          <a onclick="XoaNgay('<%= book.id%>')"> 
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+              <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+            </svg>
+          </a> 
+        </td>
+      </tr>
+      <% });  %>
+      <tr>
+        <td>Tổng tiền hóa đơn</td>
+        <td></td>
+        <td></td> 
+        <td>
+          <a id="TongTien"> <%=tongtien%> </a>
+
+
+          <form method="POST" action="/thanhtoan">
+            <input type="hidden" name="xTongTien" value="<%=tongtien%>" id="xTongTien">
+            <input type="hidden" name="xDSSach" value="{}" id="xDSSach">
+            <button>Thanh toán</button>
+          </form>
+
+        </td>
+
+      
+      </tr>
+    </tbody>
+  </table>
+
+  </body>
+
+  <script>
+
+
+    //------------------------------------------------------------
+    function XoaNgay(xid) {
+      var xsl = document.getElementById("number-" + xid).value;
+      thanhtien = xsl * dssach[xid].price;
+      tongsotien = tongsotien - thanhtien;
+      document.getElementById("TongTien").innerText = tongsotien;
+      document.getElementById("xTongTien").value = tongsotien;
+      var bk = document.getElementById("book-" + xid);
+      bk.remove();
+      xoaSach(xid);
+    }
+
+    //------------------------------------------------------------
+    function Xoa(xid) {
+      var bk = document.getElementById("book-" + xid);
+      bk.remove();
+      xoaSach(xid)
+    }
+
+    //------------------------------------------------------------
+    function themSach(id, sl, price) {
+      dssach[id] = {sl: sl, price: price};
+    }
+
+    //------------------------------------------------------------
+    function xoaSach(xid) {
+      dsmoi = {};
+      for(var k in dssach) {
+        if (k != xid) {
+          dsmoi[k] = dssach[k];
+        }
+      }
+      dssach= dsmoi;
+
+      if (Object.keys(dsmoi).length == 0) {
+        //alert("... ko có gì trong giỏ hàng !");
+        document.getElementById("giotrong").innerText = "Không có sản phẩm nào!"
+      }
+      console.log("dsmoi", dssach);
+
+      document.getElementById("xDSSach").value = JSON.stringify(dssach);
+    }
+
+    //------------------------------------------------------------
+  function thaydoi(xid) {
+    var xsl = document.getElementById("number-" + xid).value;
+    if (xsl < 0) { 
+      xsl = 0; 
+      document.getElementById("number-" + xid).value = 0;        
+    }
+    if (xsl > 100) { 
+      xsl = 100; 
+      document.getElementById("number-" + xid).value = 100;
+    }
+    thanhtien = xsl * dssach[xid].price;
+    ttcu = dssach[xid].sl * dssach[xid].price;
+    tongsotien = tongsotien - ttcu + thanhtien;
+    document.getElementById("thanhtien-" + xid).innerText =  thanhtien;
+    document.getElementById("TongTien").innerText = tongsotien;
+    document.getElementById("xTongTien").value = tongsotien;
+    
+    dssach[xid].sl = xsl;
+    document.getElementById("xDSSach").value = JSON.stringify(dssach);
+
+    if (xsl <= 0) Xoa(xid);
+    
+  }
+
+  
+    //------------------------------------------------------------
+  function giamSL(xid) {
+    var xsl = document.getElementById("number-" + xid).value;
+    if (xsl > 0) 
+    {
+      xsl--;
+      document.getElementById("number-" + xid).value = xsl;
+      dongia = parseInt(document.getElementById("price-" + xid).innerText)
+      tongsotien = tongsotien - dongia;
+      document.getElementById("thanhtien-" + xid).innerText = 
+      parseInt(document.getElementById("thanhtien-" + xid).innerText) 
+        - dongia;
+      document.getElementById("TongTien").innerText = tongsotien;
+      document.getElementById("xTongTien").value = tongsotien;
+
+      dssach[xid].sl = xsl;
+      document.getElementById("xDSSach").value = JSON.stringify(dssach);
+      
+    }
+
+    if (xsl <= 0) Xoa(xid);
+  }
+
+  
+    //------------------------------------------------------------
+  function tangSL(xid) {
+    var xsl = document.getElementById("number-" + xid).value;
+    if (xsl < 100) 
+    {
+      xsl++;
+      document.getElementById("number-" + xid).value = xsl;
+      dongia = parseInt(document.getElementById("price-" + xid).innerText);
+      tongsotien = tongsotien + dongia;
+      document.getElementById("thanhtien-" + xid).innerText = 
+      parseInt(document.getElementById("thanhtien-" + xid).innerText) 
+        + dongia;
+      document.getElementById("TongTien").innerText = tongsotien;
+      document.getElementById("xTongTien").value = tongsotien;
+
+      dssach[xid].sl = xsl;
+      document.getElementById("xDSSach").value = JSON.stringify(dssach);
+    }
+  }
+
+
+  
+    //------------------------------------------------------------
+    tongsotien = <%=tongtien%>;
+
+    dssach = {};    
+
+    <% booklist.forEach(function(book){ %>
+      themSach("<%= book.id%>", <%= book.quantity%>, <%=book.price%>);
+    <% });  %>
+
+    document.getElementById("xDSSach").value = JSON.stringify(dssach);
+    
+  </script>
+
+
+</html>
+
