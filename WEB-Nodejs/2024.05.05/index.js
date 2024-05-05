@@ -94,17 +94,40 @@ app.post("/giohang", (req, res) => {
 })
 
 app.post("/thanhtoan", (req, res) => {
+    dl = JSON.parse(req.body.xDSSach);
+
     console.log("Tong tien", 
         req.body.xTongTien,
-        req.body.xDSSach);
+        //req.body.xDSSach
+        dl
+    );
     // tính tiền giao hàng ...
+    
+
+
+    trongluong = {};
+    BookData.forEach( (bk) => {
+        trongluong[bk.id] = bk.weight;
+    } );
+
+    TongKhoiLuong = 0;
+    for( var k in dl) {
+        TongKhoiLuong +=  dl[k].sl * trongluong[ Number(k) ];
+    }
+
+    soky= Math.round(TongKhoiLuong/1000);
+    if (soky * 1000 + 100 < TongKhoiLuong)  soky++;
+    if (soky == 0) soky = 1;
+
+    console.log("Khoi luong", TongKhoiLuong, soky);
 
     res.render("thanhtoan", {
-        ghtc: 19000 ,
-        ghnh: 50000 ,
-        ghst: 100000 ,
+        ghtc: soky*19000 ,
+        ghnh: soky*50000 ,
+        ghst: soky*100000 ,
         tongtien: req.body.xTongTien
         , thanhtien: req.body.xTongTien
+        , khoiluong : soky
     });
 })
 
