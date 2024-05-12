@@ -211,4 +211,12 @@
 
     }
   </script>
+
+  <script>
+    strdata = "<%= khuyenmai%>";
+    strdata = strdata.replaceAll("&#34;", '"');
+    // &#34;
+    var MaKhuyenMai = JSON.parse(strdata);
+    console.log(MaKhuyenMai);
+  </script>
 </html>
