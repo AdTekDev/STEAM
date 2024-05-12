@@ -135,7 +135,7 @@
                 
                 <input type="text" class="form-control" id="MKM"  name="MKM">
                 <span class="input-group-text">
-                    <button type="button" class="btn btn-primary">Áp dụng</button>
+                    <button type="button" class="btn btn-primary"  onclick="apDungKhuyenMai()">Áp dụng</button>
                 </span>
                 
             </div>
@@ -218,5 +218,31 @@
     // &#34;
     var MaKhuyenMai = JSON.parse(strdata);
     console.log(MaKhuyenMai);
+
+    function apDungKhuyenMai() {
+        mkm = document.getElementById("MKM").value;
+        if (MaKhuyenMai[mkm]) {
+            if (tienThanhTien >= MaKhuyenMai[mkm].minValue) {
+                if (MaKhuyenMai[mkm].typePromotion == "%") {
+                    tienKhuyenMai = tienThanhTien * MaKhuyenMai[mkm].valuePromotion / 100;
+                    if (tienKhuyenMai > MaKhuyenMai[mkm].maxPromotion) {
+                        tienKhuyenMai = MaKhuyenMai[mkm].maxPromotion;
+                    }
+                } else {
+                    tienKhuyenMai = MaKhuyenMai[mkm].valuePromotion;
+                }
+                tienTongSo = tienThanhTien + tienVanChuyen  - tienKhuyenMai;
+            
+                document.getElementById("tienKhuyenMai").innerText = tienKhuyenMai;
+                document.getElementById("tienTongSo").innerText = tienTongSo;
+            
+            } else {
+                alert("đơn hàng không đủ tiền áp dụng mã khuyến mãi " + mkm );
+            }
+            
+        } else {
+            alert("không có mã khuyến mãi " + mkm );
+        }
+    }
   </script>
 </html>

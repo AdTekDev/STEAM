@@ -1,0 +1,14 @@
+{
+    "free_toan_tap": { 
+        "minValue": 1000
+        , "typePromotion": "%"
+        , "valuePromotion": 10
+        , "maxPromotion" : 500000
+    }
+    , "m00": { 
+        "minValue": 500000
+        , "typePromotion": "v"
+        , "valuePromotion": 50000
+        , "maxPromotion" : 50000
+    }
+}
