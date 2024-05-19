@@ -1,0 +1,13 @@
+[
+    {
+        "kho" : "Q1",
+        "sachTrongKho" : [
+            {"id":1, "soluong": 15},
+            {"id":2, "soluong": 10}
+        ],
+        "sachChuanBiGiaoTheoDonHang" : [
+            {"id":1, "soluong": 6},
+            {"id":2, "soluong": 4}
+        ]
+    }    
+]
