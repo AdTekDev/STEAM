@@ -1,4 +1,7 @@
 express = require("express")
+const { v4: uuidv4 } = require('uuid');
+const date = require('date-and-time');
+
 app = express()
 path = require("path")
 PORT = 80
@@ -137,6 +140,9 @@ app.post("/thanhtoan", (req, res) => {
 
 app.post("/hoantat", (req, res) => {
     console.log(req.body.HoTen, req.body.eMail);
+    const now  =  new Date(); 
+    masodonhang = date.format(now,'YYMMDDHHmmss'); 
+    //uuidv4();
     res.render("hoantat", {
         tongtien: req.body.xTongTien, 
         thanhtien: req.body.xTongTien,
@@ -148,6 +154,7 @@ app.post("/hoantat", (req, res) => {
         GiaoHang : req.body.GiaoHang,
         ThanhToan : req.body.ThanhToan,
         MKM : req.body.MKM,
+        MaDonHang : masodonhang,
     });
 })
 
