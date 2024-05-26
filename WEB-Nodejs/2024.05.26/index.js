@@ -19,6 +19,7 @@ app.set("view engine", "ejs");
 // DATA 
 var BookData = require('./data.json');
 var KhuyenMai = require('./data_MaKhuyenMai.json');
+var KhoSach = require('./data_KhoSach.json');
 
 //-----------------------------------------------------
 
@@ -60,8 +61,9 @@ app.get("/logout", (req, res) => {
 })
 
 app.get("/sanpham", (req, res) => {
-    console.log(BookData)
-    res.render("sanpham", {booklist: BookData});
+    console.log(BookData);
+    console.log(KhoSach)
+    res.render("sanpham", {booklist: BookData, kho: KhoSach });
 })
 
 app.get("/sanpham/:id", (req, res) => {
