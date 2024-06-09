@@ -43,6 +43,8 @@
 
     console.log(JSON.parse(dlKhoSach));
 
+    dlKhoSach = JSON.parse(dlKhoSach);
+
   </script>
 
   <script>
@@ -54,7 +56,13 @@
       alert(title);
 
       if (giohang[id]){
-        giohang[id][3]++;
+        sl = giohang[id][3];
+        if (sl < dlKhoSach[0].sachTrongKho[id].soluong) {
+          sl++;
+          giohang[id][3] = sl;
+        } else {
+          alert("Quá số lượng sách trong kho, không thể tăng");
+        }
       } else {
         giohang[id] = [id, title, price, 1];
       }
