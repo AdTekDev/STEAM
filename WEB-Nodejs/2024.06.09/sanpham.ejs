@@ -34,9 +34,15 @@
   </body>
   
   <script>
-    <% khosach.forEach(function(khoX){ %>
-      console.log(khoX.kho, khoX.sachTrongKho);
-  <% });  %>
+    
+    var dlKhoSach = "<%= khosach%>";
+    var r = /\&#(\d\d);/gi;
+    // replaces each numerical ascii character with their character representation
+    dlKhoSach = dlKhoSach.replace(r, function (match, grp) {
+            return String.fromCharCode(parseInt(grp)); } );
+
+    console.log(JSON.parse(dlKhoSach));
+
   </script>
 
   <script>

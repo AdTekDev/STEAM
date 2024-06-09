@@ -63,7 +63,10 @@ app.get("/logout", (req, res) => {
 app.get("/sanpham", (req, res) => {
     console.log(BookData);
     console.log(KhoSach)
-    res.render("sanpham", {booklist: BookData, khosach: KhoSach });
+    res.render("sanpham", {
+        booklist: BookData
+        , khosach: JSON.stringify(KhoSach) 
+    });
 })
 
 app.get("/sanpham/:id", (req, res) => {
