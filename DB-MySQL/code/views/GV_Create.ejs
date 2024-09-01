@@ -10,26 +10,32 @@
     <body>
         <h3>Tạo thêm thông tin mới về GV</h3>
 
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="magv">Mã giảng viên</span>
-            <input type="text" class="form-control" 
-            placeholder="magv" aria-label="magv" 
-            aria-describedby="magv">
-        </div>
+        <form class="row g-3" method="POST">
+            <div class="input-group mb-3">
+                <span class="input-group-text" >Mã giảng viên</span>
+                <input type="text" class="form-control" 
+                placeholder="magv" aria-label="magv"  name="magv" id="magv"
+                aria-describedby="magv">
+            </div>
 
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="hotengv">Họ và tên</span>
-            <input type="text" class="form-control" 
-            placeholder="hotengv" aria-label="hotengv" 
-            aria-describedby="hotengv">
-        </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" >Họ và tên</span>
+                <input type="text" class="form-control" 
+                placeholder="hotengv" aria-label="hotengv"  name="hotengv" id="hotengv"
+                aria-describedby="hotengv">
+            </div>
 
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="makhoa">Mã khoa</span>
-            <input type="text" class="form-control" 
-            placeholder="makhoa" aria-label="makhoa" 
-            aria-describedby="makhoa">
-        </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" >Mã khoa</span>
+                <input type="text" class="form-control" 
+                placeholder="makhoa" aria-label="makhoa"   name="makhoa" id="makhoa"
+                aria-describedby="makhoa">
+            </div>
+
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">Tạo mới thông tin</button>
+            </div>
+        </form>
 
     </body>
 </html>

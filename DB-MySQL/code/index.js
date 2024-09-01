@@ -1,4 +1,5 @@
 const express = require('express')
+var bodyParser = require('body-parser')
 const app = express()
 const port = 3000
 
@@ -18,9 +19,16 @@ connectionSQL.connect(function(err) {
 app.set('view engine', 'ejs');
 //app.set('views', 'views');
 
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
+
 app.get('/', (req, res) => {
         res.send('University - Home Page!')
 })
+
+
 
 app.get('/giangvien', (req, res) => {
   connectionSQL.query("SELECT * FROM giangvien", function (err, result, fields) {
@@ -50,6 +58,11 @@ app.get('/giangvien', (req, res) => {
 
 app.get('/giangvien/create', (req, res) => {
     res.render("GV_Create");
+})
+
+app.post('/giangvien/create', (req, res) => {
+  console.log(req, req.body);
+  res.send(req.body);
 })
 
 app.get('/load/:table', (req, res) => {
