@@ -62,7 +62,20 @@ app.get('/giangvien/create', (req, res) => {
 
 app.post('/giangvien/create', (req, res) => {
   console.log(req, req.body);
-  res.send(req.body);
+  //res.send(req.body);
+  gv = req.body;
+  connectionSQL.query(
+    " insert into giangvien values ("
+    + gv.magv
+    + ",'" + gv.hotengv + "',500,'" + gv.makhoa + "'"
+    +")", function (err, result, fields) {
+    if (err) {
+      res.send("Error !");
+      throw err;
+    }
+    console.log(result);
+    res.send("Create thanh cong !");
+  });
 })
 
 app.get('/load/:table', (req, res) => {
